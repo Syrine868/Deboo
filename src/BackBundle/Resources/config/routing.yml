@@ -1,0 +1,16 @@
+back_homepage:
+    path:     /accueil
+    defaults: { _controller: BackBundle:Default:index }
+
+commandes:
+    path:     /commandes
+    defaults: { _controller: BackBundle:Commande:commandes }
+
+supprimer:
+    path: /commandes/{idOrder}
+    defaults: {_controller: BackBundle:Commande:supprimer}
+
+update:
+    path: /commandes/update/{idOrder}
+    defaults: {_controller: BackBundle:Commande:updateCommande}
+

@@ -1,0 +1,46 @@
+{% extends 'baseBack.html.twig' %}
+    {% block head %}
+        <link rel="stylesheet" href="https://bootswatch.com/4/journal/bootstrap.min.css"/>
+    {% endblock %}
+
+{% block body %}
+    <br>
+    <br>
+    <center>
+        <h1 style="color: #080808 ; font-family: bold ">
+            Liste
+        </h1>
+
+        <table class="table table-dark" bgcolor="#6495ed" style="width:1000px;" >
+            <tr>
+                <td scope="row"><a href=""><input type="submit" name="btnU"  class="btn btn-theme" /></a></td>
+
+            </tr>
+            <tr>
+                <th scope="col">Message</th>
+                <th scope="col">Réponse</th>
+                <th scope="col">Statut</th>
+
+
+
+            </tr>
+
+            {% for Claim in Claim %}
+                <tr>
+                    <td scope="row">{{ Claim.message }}</td>
+                    <td scope="row">{{Claim.answer}}</td>
+                    <td scope="row">{{ Claim.status}}</td>
+
+                    <td scope="row"><a href=""> <input type="submit" name="btnU"  class="btn btn-info" ><i class="fa fa-pencil"></i></a></td>
+                    <a href=""> <input type="submit" name="btnD"  class="btn btn-danger" > <i class="fa fa-trash"></i></a></td>
+
+                </tr>
+
+
+            {% endfor %}
+
+
+        </table>
+    </center>
+
+{% endblock %}

@@ -1,0 +1,211 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block content %}
+    <br><br><br><br><br><br><br>
+    <div class="bg-light p-3">
+        <h1>Votre panier</h1>
+    </div>
+    {% if prods | length > 0 %}
+        <form method="post">
+
+        <table class="table table-light"  style="width:1350px;">
+
+            <thead>
+            <tr>
+                <th>Image</th>
+                <th></th>
+                <th>Produit</th>
+                <th></th>
+                <th>Prix</th>
+
+                <th>Quantité</th>
+                <th></th>
+                <th>Total</th>
+                <th></th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for key,value in pagination %}
+                <tr>
+                    <td> <img  style="height: 70px;" src="{{ asset('images/'~ prods[key].productpic)  }}"></td>
+                  <td></td>
+                    <td>{{ prods[key].productName }}</td>
+                   <td></td>
+                    <td>{{ prods[key].productPrice }} DT</td>
+                    <td>
+
+
+
+                        <a href="{{ path('panier_quantity_moins', { 'idProduct':prods[key].idProduct}) }}">
+                            <img style="height: 20px" src="{{ asset('images/moins.png') }}" alt="">
+
+                        </a>
+                        {{ qts[key] }}
+
+                        <a href="{{ path('panier_quantity_plus', { 'idProduct':prods[key].idProduct}) }}">
+                            <img style="height: 20px" src="{{ asset('images/plus.png') }}" alt="">
+                        </a>
+                    </td>
+                  <td></td>
+                    <td>{{ qts[key] * prods[key].productPrice }} DT</td>
+                    <td></td>
+                    <td>
+                        <a href="{{ path('panier_supprimer', { 'idProduct':prods[key].idProduct} ) }}">
+
+                            <i  style="color:violet" class="fa fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+
+            <td colspan="7" class="text-right">Total  :</td>
+            <td>{{ total }} DT</td>
+           <tr class="text-right">
+               <td colspan="9">
+
+
+
+
+
+
+                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                       <img style="height: 20px" src="{{ asset('images/cash.png') }}">  Passer au paiement
+                   </button>
+
+
+
+                   <!-- Modal -->
+                   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                       <div class="modal-dialog" role="document">
+                           <div class="modal-content">
+                               <div class="modal-header">
+                                   <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-info"></i> Information</h5>
+                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                       <span aria-hidden="true">&times;</span>
+                                   </button>
+                               </div>
+
+                               <div class="modal-body">
+                                  <p class="text-center">Voulez-vous vraiment valider votre commande ?</p>
+                               </div>
+                               <div class="modal-footer">
+                                         <a href="{{ path('premium_payment') }}" class="btn btn-outline-info">Oui</a>
+                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Pas encore</button>
+
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+
+
+               </td>
+           </tr>
+
+        </table>
+
+
+    {% else %}
+        <table class="table table-dark" bgcolor="#6495ed" style="width:1500px;">
+            <tr>
+                <th>Panier vide</th>
+            </tr>
+
+        </table>
+        </form>
+    {% endif %}
+
+    <div class="navigation" style="margin-left: 500px;">
+        {{ knp_pagination_render(pagination)}}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus')
+        })
+    </script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script type="text/javascript">
+        var stripe = Stripe('pk_test_3L6T3YnYTiYB5rgNKsAG3Bw400TpqWWAGE');
+        var elements = stripe.elements();
+        var style = {
+            base: {
+                // Add your base input styles here. For example:
+                fontSize: '16px',
+                color: '#32325d',
+            },
+        };
+
+        // Create an instance of the card Element.
+        var card = elements.create('card', {style: style});
+
+        // Add an instance of the card Element into the `card-element` <div>.
+        card.mount('#card-element');
+        // Create a token or display an error when the form is submitted.
+        var form = document.getElementById('payment-form');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            stripe.createToken(card).then(function(result) {
+                if (result.error) {
+                    // Inform the customer that there was an error.
+                    var errorElement = document.getElementById('card-errors');
+                    errorElement.textContent = result.error.message;
+                } else {
+                    // Send the token to your server.
+                    stripeTokenHandler(result.token);
+                }
+            });
+        });
+        function stripeTokenHandler(token) {
+            // Insert the token ID into the form so it gets submitted to the server
+            var form = document.getElementById('payment-form');
+            var hiddenInput = document.createElement('input');
+            hiddenInput.setAttribute('type', 'hidden');
+            hiddenInput.setAttribute('name', 'stripeToken');
+            hiddenInput.setAttribute('value', token.id);
+            form.appendChild(hiddenInput);
+
+            // Submit the form
+            form.submit();
+        }
+
+    </script>
+    <script src="{{ asset('./assets/js/vendor/modernizr-3.5.0.min.js') }}"></script>
+
+    <!-- Jquery, Popper, Bootstrap -->
+    <script src="{{ asset('./assets/js/vendor/jquery-1.12.4.min.js') }}"></script>
+    <script src="{{ asset('./assets/js/popper.min.js') }}"></script>
+    <script src="{{ asset('./assets/js/bootstrap.min.js') }}"></script>
+    <!-- Jquery Mobile Menu -->
+    <script src="{{ asset('./assets/js/jquery.slicknav.min.js') }}"></script>
+
+    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <script src="{{ asset('./assets/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('./assets/js/slick.min.js') }}"></script>
+    <!-- Date Picker -->
+    <script src="{{ asset('./assets/js/gijgo.min.js') }}"></script>
+    <!-- One Page, Animated-HeadLin -->
+    <script src="{{ asset('./assets/js/wow.min.js') }}"></script>
+    <script src="{{ asset('./assets/js/animated.headline.js') }}"></script>
+    <script src="{{ asset('./assets/js/jquery.magnific-popup.js') }}"></script>
+
+    <!-- Scrollup, nice-select, sticky -->
+    <script src="{{ asset('./assets/js/jquery.scrollUp.min.js') }}"></script>
+    <script src="{{ asset('./assets/js/jquery.nice-select.min.js') }}"></script>
+    <script src="{{ asset('./assets/js/jquery.sticky.js') }}"></script>
+
+    <!-- contact js -->
+    <script src="{{ asset('./assets/js/contact.js') }}"></script>
+    <script src="{{ asset('./assets/js/jquery.form.js') }}"></script>
+    <script src="{{ asset('./assets/js/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('') }}./assets/js/mail-script.js"></script>
+    <script src="{{ asset('') }}./assets/js/jquery.ajaxchimp.min.js"></script>
+
+    <!-- Jquery Plugins, main Jquery -->
+    <script src="{{ asset('./assets/js/plugins.js') }}"></script>
+    <script src="{{ asset('./assets/js/main.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'baseFront.html.twig' %}
+{% block content %}
+    <br><br><br><br><br><br><br><br>
+
+    <div class="container">
+        <div class="section">
+            <div class="row">
+                <div class="col m6 offset-m3">
+                    <h1 class="text-lg-center">Recherche avancée</h1>
+
+
+
+                </div>
+                {{ form(form) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block javacripts %}
+    {{ parent() }}
+    <script>
+        $(document).read(function () {
+            $('select').formSelect();
+        });
+    </script>
+{% endblock %}

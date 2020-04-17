@@ -1,0 +1,4 @@
+services:
+#    equipement.example:
+#        class: EquipementBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

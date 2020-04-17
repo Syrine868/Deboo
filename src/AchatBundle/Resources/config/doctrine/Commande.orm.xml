@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AchatBundle\Entity\Commande" table="commande">
+    <indexes>
+      <index name="id" columns="id"/>
+      <index name="idEmp" columns="idEmp"/>
+    </indexes>
+    <id name="idorder" type="integer" column="idOrder">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="orderdate" type="date" column="orderDate" nullable="false"/>
+    <field name="transporterchoicedate" type="date" column="transporterChoiceDate" nullable="false"/>
+    <field name="orderstate" type="string" column="orderState" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="total" type="float" column="total" precision="10" scale="0" nullable="false"/>
+    <field name="transporterstate" type="string" column="transporterState" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="paymentstate" type="string" column="paymentState" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="id" target-entity="UserBundle\Entity\User" fetch="LAZY">
+      <join-columns>
+        <join-column name="id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idemp" target-entity="AchatBundle\Entity\Employee" fetch="LAZY">
+      <join-columns>
+        <join-column name="idEmp" referenced-column-name="idEmp"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

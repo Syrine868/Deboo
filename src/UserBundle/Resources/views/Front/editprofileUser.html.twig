@@ -1,0 +1,22 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% extends 'baseFront.html.twig' %}
+    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block content %}<center>
+    <h1 style="color: #006dcc">
+
+        Modifier Mon Profile
+
+    </h1>
+    {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+
+    <div class="col-sm-4" style="margin-left: 450px">
+        {{ form_widget(form) }}
+
+        <div class="col-sm-4" style="margin-left: 200px">
+            <div class=" col-md-3 col-sm-4">
+                <input type="submit" value="{{ 'Edit'|trans }}" class="btn-facebook"/>
+            </div>
+            {{ form_end(form) }}
+    </center>
+{% endblock %}

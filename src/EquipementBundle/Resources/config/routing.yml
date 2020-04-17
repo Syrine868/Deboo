@@ -1,0 +1,34 @@
+
+Add_equip:
+    path:     /addequip
+    defaults: { _controller: EquipementBundle:Equipement:addEquipment}
+list_equipments:
+    path:     /listequipments
+    defaults: { _controller: EquipementBundle:Equipement:listEquipments}
+deleteEquip:
+    path:     /{idequipment}/deletequip
+    defaults: { _controller: EquipementBundle:Equipement:deleteEquip}
+readAction_equip:
+    path:     /readAction
+    defaults: { _controller: EquipementBundle:Equipement:read}
+list_empployees:
+    path:     /listemployees
+    defaults: { _controller: EquipementBundle:Affectation:listEmployees}
+list_affectations:
+    path:     /listaffectations
+    defaults: { _controller: EquipementBundle:Affectation:listAffectations}
+Edit_equip:
+    path:     /editequip/{idequipment}
+    defaults: { _controller: EquipementBundle:Equipement:addEquipment}
+Add_affectation:
+    path:     /addaffectation
+    defaults: { _controller: EquipementBundle:Affectation:AddAffectation}
+home_page:
+    path:     /
+    defaults: { _controller: EquipementBundle:Default:index}
+update_affectation:
+    path:     /editaffectation/{id}
+    defaults:  { _controller: EquipementBundle:Affectation:AddAffectation }
+delete_affectation:
+    path:     /deleteaffectation/{id}
+    defaults: { _controller: EquipementBundle:Affectation:deleteAffectation }

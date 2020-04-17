@@ -1,0 +1,56 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% extends 'baseFront.html.twig' %}
+
+{% block content %}
+<br><br><br><br><br><br><br><br><br><br><br>
+<div style="margin-left: 100px" class="row mt">
+
+
+    <div class="col-sm-12">
+        <div class="row">
+        <div class="card" style="width: 500px ">
+            <div class="card-body">
+                <div  class="card-deck ">
+                    Mes Informations
+                </div>
+                <div class="dropdown-divider"></div>
+                <h5 class="card-title"></h5>
+                <p class="card-text">Nom : {{ app.user.username }} </p>
+                <p class="card-text"><i class="fa fa-envelope-o"></i> E-mail: {{ app.user.email }}</p>
+                <div class="dropdown-divider"></div>
+                <center><br><br><br><br>
+                    <a href="{{path('fos_user_change_password') }}"  class="btn btn-default"><i class="fa fa-lock"></i> Changer mot de passe </a>
+                    <br><br>     <a class="btn btn-facebook" href=" {{ path('edit_profil') }}"> Modifier</a>
+
+                </center>
+
+            </div>
+        </div>
+        <div class="row">
+                <div class="card" style="width: 500px ">
+                    <div class="card-body">
+                        <div  class="card-deck ">
+                        <img src="{{ asset('images/avatar.png') }}" class="img-circle" width="500">
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+            </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

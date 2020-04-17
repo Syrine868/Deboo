@@ -1,0 +1,9 @@
+user_homepage:
+    path:     /
+    defaults: { _controller: UserBundle:Default:index }
+profil_User:
+    path:     /profile
+    defaults: { _controller: UserBundle:Default:profileUser}
+edit_profil:
+    path:     /profiledit
+    defaults: { _controller: fos_user.profile.controller:editAction}

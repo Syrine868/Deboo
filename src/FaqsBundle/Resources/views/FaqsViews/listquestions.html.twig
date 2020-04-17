@@ -1,0 +1,49 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block content %}
+    <main xmlns="http://www.w3.org/1999/html">
+        <section data-background="{{ asset('front/assets/img/') }} ">
+         <center>   <br><br><br><br><br><br><br><br><br>
+             <div class="dropdown-divider"></div>
+             <div class="card-title">
+                 <h2 style="font-family: 'Berlin Sans FB Demi'">Les Questions</h2>
+             </div>
+            <div class="row">
+
+
+                {% for questio in pagination %}
+
+                    <div class="col-sm-4">
+                        <div class="card " style="width: 300px">
+
+                            <div class="card-body ">
+                                <div class="card-deck">
+                                    <img class="card-img-top "  style="width: 100px; height: 100px ; margin-left: 75px" src="{{asset('images/avatar.png') }}" alt="">
+                                </div>
+
+
+
+                                <div class="dropdown-divider"></div>
+                                <div class="card-text" >    <p>{{ questio.questionArea }}</p>
+                                </div>
+                                <div class="card-text" >    <p> Mis à jour à:  {{ questio.updatedAt | date }}</p>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+<br>
+            <div class="navigation " style="margin-left: 550px">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+
+
+         </center>
+    </section>
+    </main>
+{% endblock %}
+

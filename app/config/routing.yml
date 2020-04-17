@@ -1,0 +1,40 @@
+
+claim:
+    resource: "@ClaimBundle/Resources/config/routing.yml"
+    prefix:   /Claim
+user:
+    resource: "@UserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+ad:
+    resource: "@AdBundle/Resources/config/routing.yml"
+    prefix:   /Ad
+
+faqs:
+    resource: "@FaqsBundle/Resources/config/routing.yml"
+    prefix:   /Faqs
+
+equipement:
+    resource: "@EquipementBundle/Resources/config/routing.yml"
+    prefix:   /Equipement
+
+back:
+    resource: "@BackBundle/Resources/config/routing.yml"
+    prefix:   /back
+
+achat:
+    resource: "@AchatBundle/Resources/config/routing.yml"
+    prefix:   /achat
+my:
+    resource: "@MyBundle/Resources/config/routing.yml"
+    prefix:   /
+
+product:
+    resource: "@ProductBundle/Resources/config/routing.yml"
+    prefix:   /debo
+employe:
+    resource: "@EmployeBundle/Resources/config/routing.yml"
+    prefix:   /Emp

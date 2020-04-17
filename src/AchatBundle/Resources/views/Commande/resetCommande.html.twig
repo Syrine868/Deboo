@@ -1,0 +1,96 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block content %}
+    <br><br><br><br><br> <br><br>
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <div class="container">
+
+        <div class="bg-light p-3">
+            <h1>Annuler votre commande</h1>
+        </div>
+
+        <br><br>
+        <div class="row" style="margin-left: 400px;">
+            {{ form_start(form) }}
+            <div class="form-row">
+                <br><br>
+                <label for="" style="margin-top: 10px;">Etat de la commande :  </label>
+                {{ form_widget(form.orderState, {'attr':{'class':'form-control'}}) }}
+
+                <br><br>
+
+
+
+            </div>
+
+            <a href="{{ path('all_comd_client',{'id': app.user.id}) }}">
+                <button class="form-control"><i class="fa fa-trash"></i>Annuler</button></a>
+            {{ form_end(form)}}
+        </div>
+
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-info"></i> Information</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <p class="text-center">Voulez-vous vraiment annuler votre commande ?</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="{{ path('all_comd_client',{'id': app.user.id}) }}" class="btn btn-outline-info">Oui</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Pas encore</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts%}
+    <script src="{{ asset('./assets/js/vendor/modernizr-3.5.0.min.js') }}"></script>
+
+    <!-- Jquery, Popper, Bootstrap -->
+    <script src="{{ asset('./assets/js/vendor/jquery-1.12.4.min.js') }}"></script>
+    <script src="{{ asset('./assets/js/popper.min.js') }}"></script>
+    <script src="{{ asset('./assets/js/bootstrap.min.js') }}"></script>
+    <!-- Jquery Mobile Menu -->
+    <script src="{{ asset('assets/js/jquery.slicknav.min.js') }}"></script>
+
+    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('assets/js/slick.min.js') }}"></script>
+    <!-- Date Picker -->
+    <script src="{{ asset('assets/js/gijgo.min.js') }}"></script>
+    <!-- One Page, Animated-HeadLin -->
+    <script src="{{ asset('assets/js/wow.min.js') }}"></script>
+    <script src="{{ asset('assets/js/animated.headline.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.magnific-popup.js') }}"></script>
+
+    <!-- Scrollup, nice-select, sticky -->
+    <script src="{{ asset('assets/js/jquery.scrollUp.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.nice-select.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.sticky.js') }}"></script>
+
+    <!-- contact js -->
+    <script src="{{ asset('assets/js/contact.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.form.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('') }}./assets/js/mail-script.js"></script>
+    <script src="{{ asset('') }}./assets/js/jquery.ajaxchimp.min.js"></script>
+
+    <!-- Jquery Plugins, main Jquery -->
+    <script src="{{ asset('assets/js/plugins.js') }}"></script>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
+{% endblock %}
+
+

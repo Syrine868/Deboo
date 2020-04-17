@@ -1,0 +1,56 @@
+product_homepage:
+    path:     /
+    defaults: { _controller: ProductBundle:Default:index }
+
+addcategory:
+    path:     /admin/backoffice/add
+    defaults: { _controller: ProductBundle:Category:add }
+
+showcategory:
+    path:     /admin/backoffice/show
+    defaults: { _controller: ProductBundle:Category:show }
+
+deletecategory:
+    path:     /admin/backoffice/delete/{idcategory}
+    defaults: { _controller: ProductBundle:Category:delete }
+
+editcategory:
+    path:     /admin/backoffice/edit/{idcategory}
+    defaults: { _controller: ProductBundle:Category:edit }
+
+addproduct:
+    path:     /admin/backoffice/addproduct
+    defaults: { _controller: ProductBundle:Product:addproduct }
+
+showproduct:
+    path:     /admin/backoffice/showproduct
+    defaults: { _controller: ProductBundle:Product:showproduct }
+
+detailproduct:
+    path:     /admin/backoffice/detailproduct/{idproduct}
+    defaults: { _controller: ProductBundle:Product:detail}
+
+deleteproduct:
+    path:     /admin/backoffice/deleteproduct/{idproduct}
+    defaults: { _controller: ProductBundle:Product:deleteproduct}
+
+editproduct:
+    path:     /admin/backoffice/editproduct/{idproduct}
+    defaults: { _controller: ProductBundle:Product:editprod}
+
+ajaxsearch:
+    path:     /rechercherproduct
+    defaults: { _controller: ProductBundle:Product:search }
+
+Product_sort:
+    path:     /admin/backoffice/sort/{sort}
+    defaults: { _controller: ProductBundle:Product:sort }
+
+frontshowproduct:
+    path:     /showproduct
+    defaults: { _controller: ProductBundle:Product:frontshowproduct }
+
+product_pdf:
+    path:     /admin/backoffice/pdf
+    defaults: { _controller: ProductBundle:Product:pdf }
+    methods:  [GET, POST]

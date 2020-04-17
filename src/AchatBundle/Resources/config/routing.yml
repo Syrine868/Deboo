@@ -1,0 +1,62 @@
+achat_homepage:
+    path:     /
+    defaults: { _controller: AchatBundle:Default:index }
+
+achat_produits:
+    path: /produits_achat
+    defaults: {_controller: AchatBundle:Achat:afficherProduits}
+
+recherche_produit:
+    path: /produits_achat/recherche
+    defaults: {_controller: AchatBundle:Achat:recherche}
+
+
+achat_ajout:
+    path: /produits_achat/ajout/{idProduct}
+    defaults: {_controller: AchatBundle:Achat:ajouterProduitPanier}
+
+panier_afficher:
+    path: /produits_achat/panier
+    defaults: {_controller: AchatBundle:Achat:getPanier}
+
+panier_supprimer:
+    path: /produits_achat/supprimer/{idProduct}
+    defaults: {_controller: AchatBundle:Achat:supprimerProduitPanier}
+
+panier_quantity_plus:
+    path: /produits_achat/updateplus/{idProduct}
+    defaults: {_controller: AchatBundle:Achat:updateQuantityPlus}
+
+panier_quantity_moins:
+    path: /produits_achat/updatemoins/{idProduct}
+    defaults: {_controller: AchatBundle:Achat:updateQuantityMoins}
+
+premium_payment:
+    path: /panier/paiement
+    defaults: {_controller: AchatBundle:Achat:payment}
+
+commande:
+    path: /panier/validerCommande
+    defaults: {_controller: AchatBundle:Achat:validerCommande}
+
+all_comd_client:
+    path: /client/commandedetail/{id}
+    defaults: {_controller: AchatBundle:Achat:commandesClient}
+
+
+find_comd_client:
+    path: /client/commandedetail/recherche
+    defaults: {_controller: AchatBundle:Achat:commandesClient}
+
+annuler_commande:
+    path: /client/{idOrder}/annuler
+    defaults: {_controller: AchatBundle:Achat:annulerCommande}
+
+supprimer_commande:
+    path: /client/{idOrder}/supprimer
+    defaults: {_controller: AchatBundle:Achat:deleteCommande}
+
+
+ajax_search:
+    path: /search
+    defaults: {_controller: AchatBundle:Achat:search}

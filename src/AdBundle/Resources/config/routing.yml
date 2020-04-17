@@ -1,0 +1,47 @@
+read_ad:
+    path:     /read
+    defaults: { _controller: AdBundle:Ad:read }
+
+create_ad:
+    path:     /create
+    defaults: { _controller: AdBundle:Ad:create }
+
+delete_ad:
+    path:     /delete/{id}
+    defaults: { _controller: AdBundle:Ad:delete }
+
+update_ad:
+    path:     /update/{id}
+    defaults: { _controller: AdBundle:Ad:update }
+
+
+read_Sponsor:
+    path:     /read_Sponsor
+    defaults: { _controller: AdBundle:Sponsor:read_Sponsor }
+
+create_Sponsor:
+    path:    /create_Sponsor
+    defaults: { _controller: AdBundle:Sponsor:create_Sponsor }
+
+delete_Sponsor:
+    path:     /Sponsor_delete/{id}
+    defaults: { _controller: AdBundle:Sponsor:delete_Sponsor }
+
+update_Sponsor:
+    path:     /Sponsor_update/{id}
+    defaults: { _controller: AdBundle:Sponsor:update}
+
+
+ad_click:
+    path:     /ad_click/{id}
+    defaults: { _controller: AdBundle:Ad:ad_click}
+
+
+chart:
+    path:     /chart
+    defaults: { _controller: AdBundle:Ad:chart}
+
+bar:
+    path:     /bar
+    defaults: { _controller: AdBundle:Ad:Bar}
+

@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+    <title>
+        Liste
+    </title>
+</head>
+<body>
+<table border="1">
+        {% for i in liste %}
+            <tr>
+                <td>{{ i.Title }}</td>
+                <td>{{ i.Club }}</td>
+                <td>{{ i.Prix }}</td>
+                <td>{{ i.nbrp }}</td>
+                {% if(i.nbrp>0) %}
+                    <td>
+                        <a href="{{ path('club_hello',{'v':i.Club}) }}"><button>Participer</button></a>
+                    </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+</table>
+</body>
+</html>

@@ -1,0 +1,58 @@
+employe_homepage:
+    path:     /home
+    defaults: { _controller: EmployeBundle:Employe:index}
+absence_listpage:
+        path:     /absence
+        defaults: { _controller: EmployeBundle:Employe:showab }
+employe_showpage:
+    path:     /ShowAll
+    defaults: { _controller: EmployeBundle:Employe:show }
+employe_addpage:
+        path:     /Add
+        defaults: { _controller: EmployeBundle:Employe:add}
+employe_removepage:
+        path:     /{idemp}/remove
+        defaults: { _controller: EmployeBundle:Employe:remove}
+employe_updatepage:
+        path:     /{idemp}/update
+        defaults: { _controller: EmployeBundle:Employe:add}
+absence_addpage:
+        path:     /adda
+        defaults: { _controller: EmployeBundle:Employe:addab }
+absence_removepage:
+        path:     /{idabsence}/removeAb
+        defaults: { _controller: EmployeBundle:Employe:removeab }
+absence_updatepage:
+        path:     /{idabsence}/updateAb
+        defaults: { _controller: EmployeBundle:Employe:addab }
+
+absence_search:
+            path:    /searchAb
+            defaults: { _controller: EmployeBundle:Employe:search }
+user_home:
+    path:     /home
+    defaults: { _controller: EmployeBundle:Default:index}
+front_home:
+    path:     /homeF
+    defaults: { _controller: EmployeBundle:Employe:indexf}
+equipe_show:
+    path:     /equipe
+    defaults: { _controller: EmployeBundle:Employe:showequipe}
+
+sendmail_page:
+    path: /{idemp}/sendmail
+    defaults: { _controller: EmployeBundle:Employe:sendMail}
+
+
+
+Event_Back:
+    path:     /showBack
+    defaults: { _controller: EvenementBundle:Evenement:showback }
+
+LoadEvent:
+    path:     /load
+    defaults: { _controller: EmployeBundle:Employe:load }
+addEvent:
+    path:     /add
+    defaults: { _controller: EvenementBundle:Evenement:add }
+

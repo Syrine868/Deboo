@@ -1,0 +1,145 @@
+{% extends 'baseBack.html.twig' %}
+{% block content %}
+
+
+    <body>
+    <section id="container">
+
+
+        <br><br><br><br><br>
+        <h3><i class="fa fa-angle-right"></i>Liste des Employés</h3>
+        <div class="row mb">
+            <!-- page start-->
+
+            <td scope="row"><a href="{{ path('employe_addpage') }}"><button type="submit" class="btn btn-theme btn-sm"><i class="fa fa-plus-circle"></i>  Ajouter</button></a></td>
+
+            <br>
+            <br>
+            <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped" id="hidden-table-info">
+
+                <thead>
+
+
+                <tr>
+
+                    <th scope="col">Nom Complet</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Numéro de télephone</th>
+                    <th scope="col">Salaire</th>
+                    <th scope="col">Adresse email</th>
+                    <th scope="col">Fonction</th>
+                    <th scope="col">Nombre d'absence</th>
+                    <th scope="col"> Actions</th>
+
+
+                </tr>
+                </thead>
+                {% for employee in liste %}
+
+                    <tr>
+
+                        <td scope="row">{{ employee.lastnameemp }} {{ employee.firstnameemp }}</td>
+                        <td scope="row">{{ employee.age }} ans</td>
+                        <td scope="row">{{ employee.phone }}</td>
+                        <td scope="row">{{ employee.salary }} DT</td>
+                        <td scope="row">{{ employee.emailaddress}}</td>
+                        <td scope="row">{{ employee.fonction }}</td>
+                        <td scope="row">{{ employee.nbAbs }}</td>
+                        <td>
+                            <a href="{{ path('employe_updatepage',{ 'idemp': employee.idemp }) }}"><i class="fa fa-edit"></i> </a>
+                            <a href="{{ path('employe_removepage',{ 'idemp': employee.idemp }) }}"><i class="fa fa-trash"></i> </a>
+                            <a href="{{ path('sendmail_page', { 'idemp': employee.idemp }) }}"><i class="fa fa-mail-forward"></i>  </a>
+
+                        </td>
+
+
+
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <!-- page end-->
+
+        <!-- /row -->
+    </section>
+    <!-- /wrapper -->
+
+    <!-- /MAIN CONTENT -->
+    <!--main content end-->
+    <!--footer start-->
+
+
+    <!-- js placed at the end of the document so the pages load faster -->
+
+    </body>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('back/lib/jquery/jquery.min.js') }}"></script>
+    <script type="text/javascript" language="javascript" src="{{ asset('back/lib/advanced-datatable/js/jquery.js') }}"></script>
+    <script src="{{ asset('back/lib/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script class="include" type="text/javascript" src="{{ asset('back/lib/jquery.dcjqaccordion.2.7.js') }}"></script>
+    <script src="{{ asset('back/lib/jquery.scrollTo.min.js') }}"></script>
+    <script src="{{ asset('back/lib/jquery.nicescroll.js') }}" type="text/javascript"></script>
+    <script type="text/javascript" language="javascript" src="{{ asset('back/lib/advanced-datatable/js/jquery.dataTables.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('back/lib/advanced-datatable/js/DT_bootstrap.js') }}"></script>
+    <!--common script for all pages-->
+    <script src="{{ asset('back/lib/common-scripts.js') }}"></script>
+    <!--script for this page-->
+    <script type="text/javascript">
+        /* Formating function for row details */
+        function fnFormatDetails(oTable, nTr) {
+
+        }
+
+        $(document).ready(function() {
+            /*
+             * Insert a 'details' column to the table
+             */
+            var nCloneTh = document.createElement('th');
+            var nCloneTd = document.createElement('td');
+            nCloneTd.innerHTML = '<img src="{{ asset('back/lib/advanced-datatable/images/details_open.png') }}">';
+            nCloneTd.className = "center";
+
+            $('#hidden-table-info thead tr').each(function() {
+                this.insertBefore(nCloneTh, this.childNodes[0]);
+            });
+
+            $('#hidden-table-info tbody tr').each(function() {
+                this.insertBefore(nCloneTd.cloneNode(true), this.childNodes[0]);
+            });
+
+            /*
+             * Initialse DataTables, with no sorting on the 'details' column
+             */
+            var oTable = $('#hidden-table-info').dataTable({
+                "aoColumnDefs": [{
+                    "bSortable": false,
+                    "aTargets": [0]
+                }],
+                "aaSorting": [
+                    [1, 'asc']
+                ]
+            });
+
+            /* Add event listener for opening and closing details
+             * Note that the indicator for showing which row is open is not controlled by DataTables,
+             * rather it is done here
+             */
+            $('#hidden-table-info tbody td img').live('click', function() {
+                var nTr = $(this).parents('tr')[0];
+                if (oTable.fnIsOpen(nTr)) {
+                    /* This row is already open - close it */
+                    this.src = "{{ asset('back/lib/advanced-datatable/images/details_open.png') }}";
+                    oTable.fnClose(nTr);
+                } else {
+                    /* Open this row */
+                    this.src = "{{ asset('back/lib/advanced-datatable/images/details_close.png') }}";
+                    oTable.fnOpen(nTr, fnFormatDetails(oTable, nTr), 'details');
+                }
+            });
+        });
+    </script>
+{% endblock %}

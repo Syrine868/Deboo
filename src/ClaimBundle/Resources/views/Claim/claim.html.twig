@@ -1,0 +1,89 @@
+{% extends 'baseFront.html.twig' %}
+{% block content %}
+<div class="services-area">
+    <div class="container">
+        <!-- Section-tittle -->
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-8">
+                <div class="section-tittle text-center mb-80">
+                    <h2>Mes Réclamations​</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<center>
+<table class="table" bgcolor="#6495ed" style="width:1000px; ">
+    <tr>
+        <td scope="row" ><a href="{{ path('claim_ajout') }}"><input type="submit" name="btnU"  class="btn btn-primary" value="Ajouter Nouvelle réclamation"/></a></td>
+
+    </tr>
+    <tr>
+        <th scope="col">Message</th>
+        <th scope="col">Réponse</th>
+        <th scope="col">Statut</th>
+
+
+
+    </tr>
+
+    {% for Claim in Claim %}
+        <tr>
+            <td scope="row">{{ Claim.message }}</td>
+            <td scope="row">{{Claim.answer}}</td>
+            <td scope="row">{{ Claim.status}}</td>
+
+            <td scope="row"><a href="{{ path('claim_delete',{ 'idrec':Claim.idrec }) }}"> <input type="submit" name="btnU"  class="btn btn-info" /><i class="fa fa-trash"></i></a></td>
+        </tr>
+
+
+    {% endfor %}
+
+
+</table>
+</center>
+<!-- Slider Area End-->
+
+
+<!-- ================ contact section end ================= -->
+
+{% endblock %}
+{% block javascripts %}
+<!-- JS here -->
+
+<!-- All JS Custom Plugins Link Here here -->
+<script src="{{ asset('assets/js/vendor/modernizr-3.5.0.min.js') }}"></script>
+
+<!-- Jquery, Popper, Bootstrap -->
+<script src="{{ asset('assets/js/vendor/jquery-1.12.4.min.js') }}"></script>
+<script src="{{ asset('assets/js/popper.min.js') }}"></script>
+<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+<!-- Jquery Mobile Menu -->
+<script src="{{ asset('assets/js/jquery.slicknav.min.js') }}"></script>
+
+<!-- Jquery Slick , Owl-Carousel Plugins -->
+<script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
+<script src="{{ asset('assets/js/slick.min.js') }}"></script>
+
+<!-- One Page, Animated-HeadLin -->
+<script src="{{ asset('assets/js/wow.min.js') }}"></script>
+<script src="{{ asset('assets/js/animated.headline.js') }}"></script>
+
+<!-- Scrollup, nice-select, sticky -->
+<script src="{{ asset('assets/js/jquery.scrollUp.min.js') }}"></script>
+<script src="{{ asset('assets/js/jquery.nice-select.min.js') }}"></script>
+<script src="{{ asset('assets/js/jquery.sticky.js') }}"></script>
+<script src="{{ asset('assets/js/jquery.magnific-popup.js') }}"></script>
+
+<!-- contact js -->
+<script src="{{ asset('assets/js/contact.js') }}"></script>
+<script src="{{ asset('assets/js/jquery.form.js') }}"></script>
+<script src="{{ asset('assets/js/jquery.validate.min.js') }}"></script>
+<script src="{{ asset('assets/js/mail-script.js') }}"></script>
+<script src="{{ asset('assets/js/jquery.ajaxchimp.min.js') }}"></script>
+
+<!-- Jquery Plugins, main Jquery -->
+<script src="{{ asset('assets/js/plugins.js') }}"></script>
+<script src="{{ asset('assets/js/main.js') }}"></script>
+{% endblock %}

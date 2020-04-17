@@ -1,0 +1,86 @@
+claim_rating:
+    resource: "@ClaimBundle/Resources/config/routing/rating.yml"
+    prefix:   /rating
+
+claim_homepage:
+    path:     /
+    defaults: { _controller: ClaimBundle:Default:index }
+
+
+admin_homepage:
+    path:     /admin
+    defaults: { _controller: ClaimBundle:Claim:admin }
+
+
+
+stat_claim:
+    path:     /stat
+    defaults: { _controller: ClaimBundle:Claim:stat}
+
+
+profile_admin:
+      path:     /profile
+      defaults: { _controller: ClaimBundle:Claim:profile }
+
+_graphePie:
+      path:     /pie
+      defaults: { _controller: ClaimBundle:Claim:index }
+
+
+list_claim:
+    path:     /list
+    defaults: { _controller: ClaimBundle:Claim:list }
+
+read_claim:
+    path:     /read
+    defaults: { _controller: ClaimBundle:Claim:read }
+
+emp_claim:
+    path:     /emp
+    defaults: { _controller: ClaimBundle:Claim:emp }
+
+
+claim_affiche:
+    path:     /show
+    defaults: { _controller: ClaimBundle:Claim:show }
+
+rate_affiche:
+    path:     /test
+    defaults: { _controller: ClaimBundle:Rate:test }
+
+front_homepage:
+    path:     /front
+    defaults: { _controller: ClaimBundle:Claim:front }
+
+claim_home:
+    path:     /claim
+    defaults: { _controller: ClaimBundle:Claim:claim }
+
+
+claim_ajout:
+    path:     /ajout
+    defaults: { _controller: ClaimBundle:Claim:ajouter }
+
+claim_delete:
+    path:     /{idrec}/delete
+    defaults: {_controller: ClaimBundle:Claim:delete }
+
+claim_supp:
+    path:     /{idrec}/supp
+    defaults: {_controller: ClaimBundle:Claim:supp }
+
+claim_answer:
+    path:     /{idrec}/modifier
+    defaults: {_controller: ClaimBundle:Claim:answer }
+
+
+rate_emp:
+    path:     /rate
+    defaults: {_controller: ClaimBundle:Claim:rate }
+
+
+
+
+
+
+

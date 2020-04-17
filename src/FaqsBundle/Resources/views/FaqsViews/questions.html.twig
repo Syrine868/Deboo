@@ -1,0 +1,47 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block content %}
+<main >
+    <center>
+    <section class="best-pricing2" data-background="{{ asset('front/assets/img/giphyy.gif') }} " data-opacity="20px" >
+        <br><br><br><br><br><br><br><br><br>
+        <div class="row">
+
+                {% for questio in pagination %}
+
+                    <div class="col-sm-4">
+
+
+                        <div class="card " style="width: 300px "  >
+
+                            <div class="card-body ">
+                                <div class="card-deck">
+                                    <img class="card-img-top" style="width: 100px; height: 100px ; margin-left: 140px" src="{{asset('images/avatar.png') }}" alt="">
+                                </div>
+
+                                <div class="dropdown-divider"></div>
+                                <div class="card-title">
+                                    <h4>{{ questio.question.questionArea }}</a></h4>
+                                </div>
+
+                                <div class="dropdown-divider"></div>
+                                <div class="card-text">    <p>{{ questio.repQuestion }}</p>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                {% endfor %}
+        </div>
+        <div class="navigation"  style="margin-left: 550px">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
+    </section>
+</center>
+
+</main>
+{% endblock %}
+

@@ -1,0 +1,180 @@
+{% extends 'baseFront.html.twig' %}
+
+
+{% block content %}
+    <br><br><br><br><br> <br><br>
+    <div class="container">
+        <div class="d-flex justify-content-center h-100">
+            <div>
+          <h2 class="text-left"> > Liste de vos commandes</h2>
+                <h2 class="text-right">Rechercher commande</h2>
+                <div class="sidebar-search">
+                    <div class="input-group custom-search-form">
+                        <input type="text" id="search" class="form-control" placeholder="chercher..">
+                    </div>
+                </div>
+                <ul class="nav" id="side-menu">
+                    <li>
+                        <a href="#">Resultat <span class="fa arrow"></span></a>
+
+                    </li>
+
+                </ul>
+
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+                <script type="text/javascript">
+                    jQuery(document).ready(function () {
+                            var searchRequest= null ;
+                            $("#search").keyup(function () {
+                            var minlength = 1 ;
+                            var that= this;
+                            var value= $(this).val();
+                            var entitySelector=$("entitiesNav").html('');
+                            if(value.length>=minlength)
+                            {
+                                if(searchRequest != null)
+                                {
+                                    searchRequest.abort();
+                                    searchRequest= $.ajax({
+                                        type: "GET",
+                                        url: "{{ path('ajax_search') }}",
+                                        data: {
+                                            'c': value
+                                        },
+                                        dataType: "text",
+                                        success: function (msg) {
+                                            if(value === $(that).val())
+                                            {
+                                                var result = JSON.parse(msg);
+                                                $.each(result, function (key, arr) {
+                                                    $.each(arr, function (id, value) {
+                                                        if(key === 'commandes')
+                                                        {
+                                                            if(id !== 'error')
+                                                            {
+                                                                console.log(value[1]);
+                                                                entitySelector.append('<li><b>'+value[1]+'</b><a href="#"></a></li>');
+
+                                                            }
+                                                            else
+                                                            {
+                                                                entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                                            }
+                                                        }
+                                                    });
+                                                });
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                            });
+                    });
+                </script>
+                {% if getUser | length > 0 %}
+                    <table  id="regions" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>Date Commande</th>
+                            <th>Etat de la commande</th>
+                            <th>Total</th>
+                            <th>Mode de Paiement</th>
+                            <th>Date Système</th>
+                            <th>Action</th>
+
+                        </tr>
+                        </thead>
+
+
+
+                        {% for getUser in pagination %}
+                            {% set difference = date('now').diff(date(getUser.orderDate)) %}
+                            {% set leftDays = difference.days %}
+                            {% if leftDays > 2 and getUser.orderState == 'commande annulée' %}
+                                <tr  style="background: violet;">
+                                    <td>{{getUser.orderDate | date('Y-m-d')}}</td>
+                                    <td>{{getUser.orderState}}</td>
+                                    <td>{{getUser.total}} DT</td>
+                                    <td>{{ getUser.paymentState }}</td>
+                                    <td> {{ "now"|date("Y-m-d H:m:s") }}</td>
+                                    <td><a href="{{ path('supprimer_commande',{'idOrder': getUser.idOrder}) }}" class="btn--blue">
+                                            <i class="fa fa-trash"></i></a></td>
+                                </tr>
+                            {% else %}
+                                <tr style="background: palevioletred;">
+                                    <td>{{getUser.orderDate | date('Y-m-d')}}</td>
+                                    <td>{{getUser.orderState}}</td>
+                                    <td>{{getUser.total}} DT</td>
+                                    <td>{{ getUser.paymentState }}</td>
+                                    <td> {{ "now"|date("Y-m-d H:m:s") }}</td>
+                                    <td><a href="{{ path('annuler_commande',{'idOrder': getUser.idOrder}) }}" class="btn--blue">
+                                            <i class="fa fa-edit"></i></a></td>
+                                </tr>
+                            {% endif %}
+
+
+                        {% endfor %}
+
+
+                    </table>
+                {% else %}
+                    <table class="table table-responsive-lg" bgcolor="#6495ed">
+                        <tr>
+                            <th>Date Commande</th>
+                            <th>Etat de la commande</th>
+                            <th>Total</th>
+                            <th>Mode de Paiement</th>
+                            <th>Date Système</th>
+                            <th>Action</th>
+
+                        </tr>
+                        <tr style="background-color: palevioletred">
+                            <th colspan="6" class="text-body">Aucune commande</th>
+                        </tr>
+
+                    </table>
+                    </form>
+                {% endif %}
+
+                <div class="navigation">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-info"></i> Information</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <p class="text-center">Voulez-vous vraiment annuler votre commande ?</p>
+
+                </div>
+                <div class="modal-footer">
+
+
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Non,Pas maintenant</button>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+

@@ -1,0 +1,47 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block content %}
+    <section class="service-area  section-padding2">
+        <div class="container">
+            <!-- Section Tittle -->
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section-tittle text-center">
+                        <h2>Rencontrez l'équipe de DEBOO!</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                {% for employee in liste %}
+
+                    <div class="col-sm-4">
+                        <div class="card" style="width: 300px">
+
+                            <div class="card-body ">
+                                <div class="card-deck">
+                                    <img class="card-img-top" style="width: 100px; height: 100px" src="{{asset('front/assets/img/blog/blog_2.png') }}" alt="">
+                                </div>
+
+                                <div class="dropdown-divider"></div>
+                                <div class="card-title">
+                                    <h4>{{ employee.lastnameemp }} {{ employee.firstnameemp }} </a></h4>
+                                </div>
+
+                                <div class="dropdown-divider"></div>
+                                <div class="card-text-center">    <p>{{ employee.fonction }}</p>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+
+        </div>
+    </section>
+{% endblock %}

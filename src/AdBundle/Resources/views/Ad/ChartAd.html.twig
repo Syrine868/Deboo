@@ -1,0 +1,117 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block content%}
+
+
+
+    <div id="chart_div"></div>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+    <script>
+        google.charts.load('current', {'packages':['corechart']});
+
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(drawChart);
+
+        // Callback that creates and populates a data table,
+        // instantiates the pie chart, passes in the data and
+        // draws it.
+        function drawChart() {
+            // Create the data table.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Topping');
+            data.addColumn('number', 'Slices');
+            {% for entry in ads %}
+            data.addRow(['{{entry.titre}}', {{entry.nbr}}]);
+            {% endfor %}
+
+            // Set chart options
+            var options = {'title':'number of view per ad',
+                'width':1200,
+                'height':800};
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+
+    </script>
+
+
+
+
+
+{% endblock %}
+
+
+{% block javascripts %}
+    <script src="{{ asset('back/lib/jquery/jquery.min.js') }}"></script>
+    <script type="text/javascript" language="javascript" src="{{ asset('back/lib/advanced-datatable/js/jquery.js') }}"></script>
+    <script src="{{ asset('back/lib/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script class="include" type="text/javascript" src="{{ asset('back/lib/jquery.dcjqaccordion.2.7.js') }}"></script>
+    <script src="{{ asset('back/lib/jquery.scrollTo.min.js') }}"></script>
+    <script src="{{ asset('back/lib/jquery.nicescroll.js') }}" type="text/javascript"></script>
+    <script type="text/javascript" language="javascript" src="{{ asset('back/lib/advanced-datatable/js/jquery.dataTables.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('back/lib/advanced-datatable/js/DT_bootstrap.js') }}"></script>
+    <!--common script for all pages-->
+    <script src="{{ asset('back/lib/common-scripts.js') }}"></script>
+    <!--script for this page-->
+    <script type="text/javascript">
+        /* Formating function for row details */
+        function fnFormatDetails(oTable, nTr) {
+
+        }
+
+        $(document).ready(function() {
+            /*
+             * Insert a 'details' column to the table
+             */
+            var nCloneTh = document.createElement('th');
+            var nCloneTd = document.createElement('td');
+            nCloneTd.innerHTML = '<img src="{{ asset('back/lib/advanced-datatable/images/details_open.png') }}">';
+            nCloneTd.className = "center";
+
+            $('#hidden-table-info thead tr').each(function() {
+                this.insertBefore(nCloneTh, this.childNodes[0]);
+            });
+
+            $('#hidden-table-info tbody tr').each(function() {
+                this.insertBefore(nCloneTd.cloneNode(true), this.childNodes[0]);
+            });
+
+            /*
+             * Initialse DataTables, with no sorting on the 'details' column
+             */
+            var oTable = $('#hidden-table-info').dataTable({
+                "aoColumnDefs": [{
+                    "bSortable": false,
+                    "aTargets": [0]
+                }],
+                "aaSorting": [
+                    [1, 'asc']
+                ]
+            });
+
+            /* Add event listener for opening and closing details
+             * Note that the indicator for showing which row is open is not controlled by DataTables,
+             * rather it is done here
+             */
+            $('#hidden-table-info tbody td img').live('click', function() {
+                var nTr = $(this).parents('tr')[0];
+                if (oTable.fnIsOpen(nTr)) {
+                    /* This row is already open - close it */
+                    this.src = "{{ asset('back/lib/advanced-datatable/images/details_open.png') }}";
+                    oTable.fnClose(nTr);
+                } else {
+                    /* Open this row */
+                    this.src = "{{ asset('back/lib/advanced-datatable/images/details_close.png') }}";
+                    oTable.fnOpen(nTr, fnFormatDetails(oTable, nTr), 'details');
+                }
+            });
+        });
+    </script>
+{% endblock %}
+

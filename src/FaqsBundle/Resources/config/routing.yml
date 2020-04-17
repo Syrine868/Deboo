@@ -1,0 +1,50 @@
+faqs_homepage:
+    path:     /
+    defaults: { _controller: FaqsBundle:Default:index }
+
+front_page:
+    path:     /front
+    defaults: { _controller: FaqsBundle:Default:index }
+faqs_page:
+    path:     /faqs
+    defaults: { _controller: FaqsBundle:Faqs:index}
+
+about_page:
+    path:     /about
+    defaults: { _controller: FaqsBundle:Faqs:about}
+
+back_listfaqs:
+    path:     /listback
+    defaults: { _controller: FaqsBundle:BackFaqs:ListFaqsBack}
+
+deleteback_faqs:
+    path:     /{slug}/delete_faqs
+    defaults: { _controller: FaqsBundle:BackFaqs:deleteFaqs }
+    methods:  GET
+addFaqs_back:
+    path:      /addFaqBack
+    defaults:  { _controller: FaqsBundle:BackFaqs:AddFaqsBack }
+editFaqs_Back:
+    path:      /{idReponse}/editfaqsback
+    defaults:  { _controller: FaqsBundle:BackFaqs:UpdateFaqs }
+
+front_listfaqs:
+    path:      /questions
+    defaults: { _controller: FaqsBundle:Faqs:listFront }
+faqs:
+    path:       /customer
+    defaults: { _controller: FaqsBundle:Faqs:questions}
+ajouter_question_customer:
+    path:       /add
+    defaults: { _controller : FaqsBundle:Faqs:AddQuestion}
+
+list_questions_user:
+    path:       /listQuestions
+    defaults : { _controller : FaqsBundle:Faqs:listQuestion }
+listquestions_back:
+    path:       /listQuestionsUser
+    defaults:  {_controller: FaqsBundle:BackFaqs:listQuestions }
+delete_reponse:
+    path:     /{idReponse}/deleterep
+    defaults: { _controller: FaqsBundle:BackFaqs:deleteQuestion }
+    methods:  GET

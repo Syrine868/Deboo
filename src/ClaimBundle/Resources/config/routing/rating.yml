@@ -1,0 +1,24 @@
+rating_index:
+    path:     /
+    defaults: { _controller: "ClaimBundle:Rating:index" }
+    methods:  GET
+
+rating_show:
+    path:     /{idemp}/show
+    defaults: { _controller: "ClaimBundle:Rating:show" }
+    methods:  GET
+
+rating_new:
+    path:     /{idemp}/new
+    defaults: { _controller: "ClaimBundle:Rating:new" }
+    methods:  [GET, POST]
+
+rating_edit:
+    path:     /{idemp}/edit
+    defaults: { _controller: "ClaimBundle:Rating:edit" }
+    methods:  [GET, POST]
+
+rating_delete:
+    path:     /{idemp}/delete
+    defaults: { _controller: "ClaimBundle:Rating:delete" }
+    methods:  DELETE

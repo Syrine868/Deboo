@@ -1,0 +1,146 @@
+
+{% extends "baseFront.html.twig" %}
+    {% block title %}Liste de Produits{% endblock %}
+
+    {% block content %}
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+
+        <html>
+
+        <div class="limiter">
+
+
+
+                </form>
+
+            <div class="sidebar-search">
+
+                <div class="input-group custom-search-form ; col-sm-12">
+
+                    <input type="text" id="search" class="form-control pl-3" placeholder="Cherchez..">
+                </div>
+                <!-- /input-group -->
+            </div>
+            <ul class="nav" id="side-menu">
+                <li>
+                    <a href="#"><span class="fa arrow"></span></a>
+                   <ul href="#" id="entitiesNav"></ul>
+                </li>
+            </ul>
+
+
+                </form>
+        </div>
+
+                <section class="service-area sky-blue section-padding2">
+
+                    <div class="container">
+
+                        <div class="row">
+                            {% for product in product %}
+                            <div class="col-xl-4 col-lg-4 col-md-6">
+                                <div class="services-caption text-center mb-30">
+                                    <div class="service-icon">
+                                        <img  src="{{ asset('uploads/Product/') }}{{ product.productpic }}"  height="100" width="100">
+                                    </div>
+                                    <div class="service-cap">
+                                        <h4><a href="#">{{ product.productname }}</a></h4>
+                                        <p>{{ product.productprice }}</p>
+                                        <p>{{ product.categoryid.categoryname }}</p>
+
+                                       " {{ socialButtons( {'googleplus':false, 'facebook':false, 'twitter':false} ) }}"
+                                    </div>
+                                </div>
+                            </div>
+
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                </section>
+
+
+
+
+
+                </div>
+            </div>
+
+
+            <div class="navigation">
+            {{ knp_pagination_render(product) }}
+        </div>
+        </div>
+
+
+        <!--===============================================================================================-->
+        <script src="{{ asset('acss/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
+        <!--===============================================================================================-->
+        <script src="{{ asset('acss/vendor/bootstrap/js/popper.js') }}"></script>
+        <script src="{{ asset('acss/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+        <!--===============================================================================================-->
+        <script src="{{ asset('acss/vendor/select2/select2.min.js') }}"></script>
+        <!--===============================================================================================-->
+        <script src="{{ asset('acss/js/main.js') }}"></script>
+
+
+
+
+
+        <script src="{{ asset('js/jquery.js') }}"></script>
+        <script>
+            jQuery(document).ready(function() {
+                var searchRequest = null;
+                $("#search").keyup(function() {
+                    var minlength = 1;
+                    var that = this;
+                    var value = $(this).val();
+
+                    var entitySelector = $("#entitiesNav").html('');
+                    if (value.length >= minlength ) {
+                        if (searchRequest != null)
+                            searchRequest.abort();
+                        searchRequest = $.ajax({
+                            type: "GET",
+                            url: "{{ path('ajaxsearch') }}",
+                            data: {
+                                'q' : value
+
+                            },
+                            dataType: "text",
+                            success: function(msg){
+                                //we need to check if the value is the same
+                                if (value===$(that).val()) {
+                                    var result = JSON.parse(msg);
+                                    $.each(result, function(key, arr) {
+                                        $.each(arr, function(id, value) {
+                                            if (key === 'product') {
+                                                if (id !== 'error') {
+                                                    console.log(value);
+                                                    entitySelector.append('<li>' +
+                                                        'Titre:' + '<h5><b>  '+value[0]+  '</b></h5></a><img src="http://localhost/deboo/web/uploads/Product/'+value[1]+'" height="150" width="130">')   ;
+                                                } else {
+                                                    entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                                }
+                                            }
+                                        });
+                                    });
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+        </script>
+
+
+
+        </html>
+    {% endblock content %}
+

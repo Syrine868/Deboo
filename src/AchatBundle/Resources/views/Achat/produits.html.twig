@@ -1,0 +1,56 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block content %}
+    <br><br><br><br><br><br><br><br>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <br><br>
+
+
+
+    <div style="margin-left: 70px" class="row">
+        {% for a in pagination %}
+            <div class="col-sm-4">
+        <div class="card" style="width: 300px">
+                    <div class="card-body">
+                        <div  class="card-deck">
+                            <img class="card-img-top" style="height: 300px;" src="{{ asset('images/'~ a.productPic)  }}">
+
+                        </div>
+                        <div class="dropdown-divider"></div>
+
+                        <h5 class="card-title">{{ a.productName }}</h5>
+                        <p class="card-text">Categorie : {{ a.categoryid.categoryName }}</p>
+                        <p class="card-text">Prix : {{ a.productPrice }} DT</p>
+                        <div class="dropdown-divider"></div>
+                        <center>
+                            <a href="{{ path('achat_ajout',{'idProduct':a.idProduct}) }}"  class="btn btn-default">
+                                <img src="{{ asset('images/panier.png') }}" style="height: 20px" alt="">
+                                Ajouter au panier
+                            </a>
+                        </center>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+
+    </div>
+
+
+
+    <br>
+    <div class="navigation" style="margin-left: 550px;">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+
+{% endblock %}

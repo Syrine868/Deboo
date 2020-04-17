@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AchatBundle\Entity\Rating" table="rating">
+    <indexes>
+      <index name="FK_EMP_RAT" columns="idEmp"/>
+    </indexes>
+    <id name="id" type="integer" column="id"/>
+    <id name="idemp" association-key="true"/>
+    <field name="note" type="integer" column="note" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <one-to-one field="idemp" target-entity="Employee" fetch="LAZY">
+      <join-columns>
+        <join-column name="idEmp" referenced-column-name="idEmp"/>
+      </join-columns>
+    </one-to-one>
+  </entity>
+</doctrine-mapping>

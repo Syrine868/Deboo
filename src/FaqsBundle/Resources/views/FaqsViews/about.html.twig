@@ -1,0 +1,126 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block content %}
+    <main>
+
+        <!-- Slider Area Start-->
+        <div class="slider-area ">
+            <div class="slider-active">
+
+                <div class="single-slider slider-height slider-padding  d-flex align-items-center">
+                    <div class="container">
+                        <div class="row d-flex align-items-center">
+                            <div class="col-lg-6 col-md-9 ">
+                                <div class="hero__caption">
+                                    <h2 data-animation="fadeInUp" data-delay=".6s">Faire avancer les choses<br>avec <h2 data-animation="fadeInUp" data-delay=".6s" style="font-family: Atlane "> DEBOO</h2></h2>
+                                    <p data-animation="fadeInUp" data-delay=".8s">Nous sommes le meilleur DEBOO. Ne soyez pas timide pour nous contacter</p>
+                                    <!-- Slider btn -->
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="hero__img d-none d-lg-block f-right" data-animation="fadeInRight" data-delay="1s">
+                                    <video class="owl-video-frame" controls>
+                                        <source src="{{ asset('front/assets/img/Média1.mp4') }}" type="video/mp4">
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Slider Area End -->
+        <!-- Best Features Start -->
+        <div class="applic-apps section-padding2">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- slider Heading -->
+                    <div class="col-xl-4 col-lg-4 col-md-8">
+                        <div class="single-cases-info mb-30">
+
+                            <h3><a href="{{ path('equipe_show') }}"> Rencontrez notre équipe </a></h3>
+                            <p> L'équipe DEBOO est une équipe motivé pleine d'enthousiasme et dynamique .
+                            Toujours prête à vous offrir de l'aide et des solutions optimales</p>
+                        </div>
+                    </div>
+                    <!-- OwL -->
+                    <div class="col-xl-8 col-lg-8 col-md-col-md-7">
+                        <div class="app-active owl-carousel">
+                            <div class="single-cases-img">
+                                <img src="{{ asset('back/img/Picture1.jpg') }}" alt="">
+                            </div>
+                            <div class="single-cases-img">
+                                <img src="{{ asset('back/img/Picture2.jpg') }}" alt="">
+                            </div>
+                            <div class="single-cases-img">
+                                <img src="{{ asset('back/img/Picture5.jpg') }}" alt="">
+                            </div>
+                            <div class="single-cases-img">
+                                <img src="{{ asset('back/img/Picture6.jpg') }}" alt="">
+                            </div>
+                            <div class="single-cases-img">
+                                <img src="{{ asset('back/img/nes.jpg') }}" alt="">
+                            </div>
+                            <div class="single-cases-img">
+                                <img src="{{ asset('back/img/Snapchat-1401973041 (2).jpg') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Applic App End -->
+        <!-- Best Features End -->
+        <!-- Services Area Start -->
+        <section class="service-area sky-blue section-padding2">
+            <div class="container">
+                <!-- Section Tittle -->
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="section-tittle text-center">
+                            <h2>Comment pouvons-nous vous aider<br>avec <span style="font-family: Atlane"> DEBOO</span>!</h2>
+                        </div>
+                    </div>
+                </div>
+                <!-- Section caption -->
+
+            </div>
+        </section>
+        <!-- Services Area End -->
+        <!-- Applic App Start -->
+
+        <!-- Applic App End -->
+        <!-- Best Pricing Start -->
+
+        <!-- Best Pricing End -->
+        <!-- Pricing Card Start -->
+
+        <div class="say-something-aera pt-90 pb-90 fix">
+            <div class="container">
+                <div class="row justify-content-between align-items-center">
+                    <div class="offset-xl-1 offset-lg-1 col-xl-5 col-lg-5">
+                        <div class="say-something-cap">
+
+
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-3">
+                        <div class="say-btn">
+                            <h6>Ajouter votre Question</h6>
+                            <a href="{{path('ajouter_question_customer')}}" class="btn radius-btn" id="ctn">Contactez-Nous</a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- shape -->
+            <div class="say-shape">
+                <img src="{{ asset('front/assets/img/q.jpg') }}" alt="" class="say-shape1 rotateme d-none d-xl-block">
+                <img src="{{ asset('front/assets/img/shape/say-shape-right.png') }}" alt="" class="say-shape2 d-none d-lg-block">
+            </div>
+        </div>
+        <!-- Say Something End -->
+
+    </main>
+{% endblock %}

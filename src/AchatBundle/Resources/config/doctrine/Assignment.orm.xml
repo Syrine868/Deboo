@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AchatBundle\Entity\Assignment" table="assignment">
+    <indexes>
+      <index name="idEmp" columns="idEmp"/>
+      <index name="idEquipment" columns="idEquipment"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="datep" type="date" column="dateP" nullable="false"/>
+    <field name="dater" type="date" column="dateR" nullable="false"/>
+    <field name="state" type="string" column="state" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="idequipment" type="integer" column="idEquipment" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="idemp" target-entity="Employee" fetch="LAZY">
+      <join-columns>
+        <join-column name="idEmp" referenced-column-name="idEmp"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>
