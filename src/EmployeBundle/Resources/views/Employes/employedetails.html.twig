@@ -1,0 +1,30 @@
+{% extends 'baseBack.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block content %}
+    <section id="main-content">
+        <section class="wrapper">
+                    <h3><i class="fa details"></i>DETAILS</h3>
+
+            <div class="panel-body">
+                <h4>{{ emp.firstnameemp  }}  {{ emp.lastnameemp  }}</h4>
+                <h4>   <span>Nombre d'absence =</span> {{ emp.nbAbs }}</h4>
+
+
+                <br>
+
+                            <span>DATE</span>
+                                <br>
+                                {{  form(form) }}
+                                 <br>
+
+                     <td></td>
+                {{ form_widget(form.Add)}}
+
+
+
+            </div>
+         </section>
+
+    </section>
+{% endblock %}

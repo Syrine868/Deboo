@@ -4,6 +4,7 @@ namespace EmployeBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -34,7 +35,9 @@ class EmployeeType extends AbstractType
                     'Chef ..' => 'Chef ..',
                     '...' => '...'],
 
-        ]);
+        ])
+            ->add('pic',FileType::class, array('data_class' => null));
+
             //->add('ajouter' , SubmitType::class);
     }/**
      * {@inheritdoc}

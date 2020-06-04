@@ -19,4 +19,36 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
 
             )->setParameter('str', '%'.$str.'%')->getResult();
     }
+    public function findLogByID(){
+        $em = $this->getEntityManager();
+        $query = $em->createQuery("SELECT c.categoryname,u.idproduct,u.productname,u.productprice,u.productpic
+                            FROM MyBundle:Product u JOIN MyBundle:Category c WITH u.categoryid = c.idcategory
+                            ");
+        if(count($query->getArrayResult()) > 0) return $query->getResult();
+        return null;
+    }
+    public function findLogBy(){
+        $em = $this->getEntityManager();
+        $query = $em->createQuery("SELECT q.questionarea,r.idreponse,r.repquestion
+                            FROM FaqsBundle:Reponse r JOIN FaqsBundle:Question q WITH q.idquestion = r.question
+                            ");
+        if(count($query->getArrayResult()) > 0) return $query->getResult();
+        return null;
+    }
+    public function findLogByUser(){
+        $em = $this->getEntityManager();
+        $query = $em->createQuery("SELECT q.questionarea,q.idquestion,r.id,q.headline
+                            FROM FaqsBundle:User r JOIN FaqsBundle:Question q WITH q.id = r.id
+                            ");
+        if(count($query->getArrayResult()) > 0) return $query->getResult();
+        return null;
+    }
+    public function findLogByComdUser(){
+        $em = $this->getEntityManager();
+        $query = $em->createQuery("SELECT c.orderstate,c.orderdate,c.transporterstate,c.paymentstate,c.total,u.id
+                            FROM MyBundle:User u JOIN AchatBundle:Commande c WITH c.id = u.id
+                            ");
+        if(count($query->getArrayResult()) > 0) return $query->getResult();
+        return null;
+    }
 }

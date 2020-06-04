@@ -28,7 +28,7 @@ class Product
      *
      * @ORM\Column(name="productPrice", type="float", precision=10, scale=0, nullable=true)
      */
-    private $productprice;
+    protected $productprice;
 
     /**
      * @var \Category

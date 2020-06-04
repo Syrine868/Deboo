@@ -1,6 +1,7 @@
 <?php
 
 namespace EmployeBundle\Entity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -23,28 +24,32 @@ class Employee
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank
      * @ORM\Column(name="lastNameEmp", type="string", length=20, nullable=false)
      */
     private $lastnameemp;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank
      * @ORM\Column(name="firstNameEmp", type="string", length=20, nullable=false)
      */
     private $firstnameemp;
 
     /**
      * @var integer
-     *
+     * @Assert\GreaterThan(
+     *     value = 18
+     * )
      * @ORM\Column(name="age", type="integer", nullable=false)
      */
     private $age;
 
     /**
      * @var integer
-     *
+     * @Assert\GreaterThanOrEqual(
+     *     value = 8
+     * )
      * @ORM\Column(name="phone", type="integer", nullable=false)
      */
     private $phone;
@@ -58,14 +63,16 @@ class Employee
 
     /**
      * @var string
-     *
+     *@Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email."
+     * )
      * @ORM\Column(name="emailAddress", type="string", length=255, nullable=false)
      */
     private $emailaddress;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank
      * @ORM\Column(name="fonction", type="string", length=30, nullable=false)
      */
     private $fonction;
@@ -76,6 +83,13 @@ class Employee
      * @ORM\Column(name="nbAbs", type="integer", nullable=false)
      */
     private $nbabs;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pic", type="string", length=255, nullable=true)
+     */
+    private $pic;
 
     /**
      * Employee constructor.
@@ -243,6 +257,23 @@ class Employee
     public function setNbabs(int $nbabs)
     {
         $this->nbabs = $nbabs;
+        return $this;
+    }
+
+    /**
+     * Get Pic
+     *
+     * @return string
+     */
+    public function getPic()
+    {
+        return $this->pic;
+    }
+
+    public function setPic($pic)
+    {
+        $this->pic = $pic;
+
         return $this;
     }
 

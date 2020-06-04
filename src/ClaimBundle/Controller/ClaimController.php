@@ -163,7 +163,7 @@ public function profileAction()
         {
             $Claim->setStatus('Pending');
             $Claim->setAnswer('Waite please');
-            $Claim->setId($this->getUser().getmyuid());
+            $Claim->setId($this->getUser());
             $em->persist($Claim);
             $em->flush();
 

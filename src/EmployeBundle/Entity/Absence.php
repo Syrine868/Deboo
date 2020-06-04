@@ -2,8 +2,10 @@
 
 namespace EmployeBundle\Entity;
 use AncaRebeca\FullCalendarBundle\Model\FullCalendarEvent;
-
+use EmployeBundle\Entity\Employee;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Absence
@@ -11,8 +13,12 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="absence", indexes={@ORM\Index(name="idEmp", columns={"idEmp"})})
  * @ORM\Entity
  */
+
 class Absence
 {
+
+
+
     /**
      * @var integer
      *
@@ -24,7 +30,7 @@ class Absence
 
     /**
      * @var \DateTime
-     *
+     * @Assert\LessThanOrEqual("today")
      * @ORM\Column(name="date", type="date", nullable=false)
      */
     private $date;
@@ -101,12 +107,6 @@ class Absence
     }
 
 
-    /**
-     * @inheritDoc
-     */
-    public function toArray()
-    {
-        // TODO: Implement toArray() method.
-    }
+
 }
 

@@ -18,7 +18,7 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Validator\Tests\Fixtures\ToString;
 
 
-class ProductController extends Controller
+class  ProductController extends Controller
 {
     public function addproductAction(Request $request)
     {

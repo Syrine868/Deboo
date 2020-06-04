@@ -38,3 +38,6 @@ product:
 employe:
     resource: "@EmployeBundle/Resources/config/routing.yml"
     prefix:   /Emp
+affectationapi:
+    resource: "@AffectationapiBundle/Resources/config/routing.yml"
+    prefix:   /aff

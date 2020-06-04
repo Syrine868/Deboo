@@ -1,0 +1,97 @@
+affectationapi_homepage:
+    path:     /
+    defaults: { _controller: AffectationapiBundle:Default:index }
+list_equipmentsapi:
+    path:     /equipments/all
+    defaults: { _controller: AffectationapiBundle:Affectationapi:listEquipmentsApi }
+list_questions_user_api:
+    path:     /questions/user/{id}
+    defaults : { _controller : AffectationapiBundle:Affectationapi:allQuestionsUsers }
+list_questions_api:
+    path:     /questions/all
+    defaults : { _controller : AffectationapiBundle:Affectationapi:listQuestion }
+ajouter_question_api:
+    path:     /questions/{id}/add
+    defaults: { _controller : AffectationapiBundle:Affectationapi:AddQuestion}
+test:
+    path:     /test
+    defaults: { _controller: AffectationapiBundle:Affectationapi:test }
+login_user:
+    path:     /lo
+    defaults: { _controller: AffectationapiBundle:Affectationapi:login }
+reponse_users:
+    path:     /response/all
+    defaults: { _controller: AffectationapiBundle:Affectationapi:questions }
+
+find_task:
+    path:     /find/{id}
+    defaults: { _controller: AffectationapiBundle:Affectationapi:find}
+
+create_task:
+    path:     /test/new
+    defaults: { _controller: AffectationapiBundle:Affectationapi:new}
+
+update_task:
+    path:     /update/{id}
+    defaults: { _controller: AffectationapiBundle:Affectationapi:update}
+all_claims:
+    path:     /Claims/all
+    defaults: { _controller: AffectationapiBundle:Affectationapi:allClaims }
+find_claim:
+    path:     /Claims/find/{idRec}
+    defaults: { _controller: AffectationapiBundle:Affectationapi:findClaim}
+create_claim:
+    path:     /Claims/{id}/new
+    defaults: { _controller: AffectationapiBundle:Affectationapi:newClaim}
+all_employees:
+    path:     /employes/all
+    defaults: { _controller: AffectationapiBundle:Affectationapi:allEmployees }
+
+create_employe:
+    path:     /employes/new
+    defaults: { _controller: AffectationapiBundle:Affectationapi:newEmployee }
+allAbsence:
+    path:     /absence/all
+    defaults: { _controller: AffectationapiBundle:Affectationapi:allAbsence }
+create_absence:
+    path:     /absence/new
+    defaults: { _controller: AffectationapiBundle:Affectationapi:newAbsence}
+
+mobile_homepage:
+    path:     /
+    defaults: { _controller: AffectationapiBundle:Affectationapi:addProduct}
+show:
+    path:     /showProduits
+    defaults: { _controller: AffectationapiBundle:Affectationapi:showProduits}
+showc:
+    path:     /showCategory
+    defaults: { _controller: AffectationapiBundle:Affectationapi:showCategory}
+add:
+    path:     /add
+    defaults: { _controller: AffectationapiBundle:Affectationapi:addProduct}
+    #CART ROUTING
+add_product_cart:
+    path:      /products/add/{idProduct}
+    defaults: { _controller: AffectationapiBundle:AchatApi:addProductToCart}
+
+show_cart:
+    path:     /cart
+    defaults: {_controller: AffectationapiBundle:AchatApi:showCart}
+
+delete_product_cart:
+    path:      /cart/delete/{idProduct}
+    defaults: { _controller: AffectationapiBundle:AchatApi:deleteProductFromCart}
+    #END CART ROUTING
+    #PAYMENT ROUTING
+stripe:
+    path:        /cart/payment/{id}
+    defaults: {_controller: AffectationapiBundle:AchatApi:payment}
+      #END PAYMENT ROUTING
+      #--------------------------------------------------------------------------#
+    #--------------------------------------------------------------------------#
+    #ORDER ROUTING
+orders_client:
+    path:       /client/commandes/{id}
+    defaults: {_controller: AffectationapiBundle:AchatApi:commandesClient}
+    #END ORDER ROUTING
+#--------------------------------------------------------------------------#

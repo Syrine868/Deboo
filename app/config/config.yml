@@ -12,6 +12,7 @@ imports:
     - { resource: "@ProductBundle/Resources/config/services.yml" }
     - { resource: "@MyBundle/Resources/config/services.yml" }
     - { resource: "@EmployeBundle/Resources/config/services.yml" }
+    - { resource: "@AffectationapiBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -21,7 +22,7 @@ parameters:
         currency: GBP
         decimal: true
         premium_amount: 1
-
+    photos_directory: '%kernel.root_dir%/../web'
 framework:
     #esi: ~
     translator: { fallbacks: ['%locale%'] }

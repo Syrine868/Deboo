@@ -6,9 +6,9 @@ use AchatBundle\Entity\Category;
 use AchatBundle\Entity\Commande;
 use AchatBundle\Entity\Employee;
 use AchatBundle\Entity\OrderLine;
-use AchatBundle\Entity\Product;
 use AchatBundle\Form\CommandeType;
 use AchatBundle\Form\ResetCommandeType;
+use MyBundle\Entity\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,7 +23,7 @@ class AchatController extends Controller
 {
     public function afficherProduitsAction(Request $request)
     {
-       // $manager=$this->getDoctrine()->getManager();
+        // $manager=$this->getDoctrine()->getManager();
         $produits=$this->getDoctrine()->getRepository(Product::class)->findAll();
         $categories=$this->getDoctrine()->getRepository(Category::class)->findAll();
         $paginator = $this->get('knp_paginator');
@@ -57,7 +57,7 @@ class AchatController extends Controller
 
     public function ajouterProduitPanierAction(SessionInterface $session, $idProduct)
     {
-       // $idProduct= $request->query->get('idProduct');
+        // $idProduct= $request->query->get('idProduct');
 
         $panier = $session->get('panier', []);
         $prod=$this->getDoctrine()->getRepository(Product::class)->find($idProduct);
@@ -67,8 +67,8 @@ class AchatController extends Controller
             $panier[$idProduct]=1;
         }
         $session->set('panier',$panier);
-         $this->addFlash('success','Produit ajouté au panier');
-          return $this->redirectToRoute('achat_produits');
+        $this->addFlash('success','Produit ajouté au panier');
+        return $this->redirectToRoute('achat_produits');
 
     }
 
@@ -131,7 +131,7 @@ class AchatController extends Controller
             'pagination'=>$pagination
         ]);
 
-        }
+    }
 
     public function supprimerProduitPanierAction($idProduct, SessionInterface $session)
     {
@@ -229,7 +229,7 @@ class AchatController extends Controller
             $prod=$this->getDoctrine()->getRepository(Product::class)->find($id);
             array_push($prods,$prod);
             array_push($qts,$qte);
-            $total+=$qte*$prod->getProductprice();
+            $total+=$qte*$prod->getProductPrice();
         }
         $em = $this->getDoctrine()->getManager();
         $commande= new Commande();
@@ -237,9 +237,9 @@ class AchatController extends Controller
         $form->handleRequest($request);
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $e=$this->getDoctrine()->getRepository(Employee::class)->find(2);
-       // $o=$this->getDoctrine()->getRepository(Commande::class)->find(18);
-     //   $employees= $this->getDoctrine()->getRepository(Employee::class)->findOneBy(array('idemp'=>$e->getIdEmp()));
-       // $employees->findOneBy(array('idemp'=>$employee->getIdemp()));
+        // $o=$this->getDoctrine()->getRepository(Commande::class)->find(18);
+        //   $employees= $this->getDoctrine()->getRepository(Employee::class)->findOneBy(array('idemp'=>$e->getIdEmp()));
+        // $employees->findOneBy(array('idemp'=>$employee->getIdemp()));
         $commande->setId($user);
         $commande->setOrderstate('en attente de confirmation');
         $commande->setTotal($total);
@@ -249,17 +249,18 @@ class AchatController extends Controller
         $commande->setTransporterstate('non affecté');
         $commande->setIdemp($e);
 
+
         $em->persist($commande);
         $em->flush();
-       // $comm = $session->get('commande', []);
-       // $session->set('commande',$commande);
-       // $comm = $em->getRepository('AchatBundle:Commande')->find($commande->getIdorder());
+        // $comm = $session->get('commande', []);
+        // $session->set('commande',$commande);
+        // $comm = $em->getRepository('AchatBundle:Commande')->find($commande->getIdorder());
 
 
         //----------------------------------------------
         //--------------------------------------------
 
-       // $line= new OrderLine();
+        // $line= new OrderLine();
         //$form1= $this->createForm(OrderLineType::class, $line);
         /*$form1->handleRequest($request);
         $line->setIdproduct($prods);
@@ -274,7 +275,7 @@ class AchatController extends Controller
                 'currency' => 'eur',
                 'source' => 'tok_visa',
                 'description'=>'Operation de paiement',
-              //  'customer'=>Stripe::$clientId,
+                //  'customer'=>Stripe::$clientId,
                 ''=> $commande,
 
             ));
@@ -285,7 +286,7 @@ class AchatController extends Controller
 
     public function commandesClientAction(Request $request, $id)
     {
-       // $user = $this->get('security.token_storage')->getToken()->getUser();
+        // $user = $this->get('security.token_storage')->getToken()->getUser();
         //$usr= $this->getUser()->getUsername();
         $getUser= $this->getDoctrine()->getRepository(Commande::class)->findBy(['id'=>$id]);
         $paginator = $this->get('knp_paginator');
@@ -296,7 +297,7 @@ class AchatController extends Controller
         );
 
         return $this->render('@Achat/Commande/commandeRecente.html.twig',
-                ['pagination'=>$pagination, 'getUser'=>$getUser]);
+            ['pagination'=>$pagination, 'getUser'=>$getUser]);
     }
 
 
@@ -305,13 +306,13 @@ class AchatController extends Controller
         // $user = $this->get('security.token_storage')->getToken()->getUser();
         //$usr= $this->getUser()->getUsername();
         $formfind= $this->createFormBuilder($commande)
-                        ->add('orderDate', DateType::class)
-                        ->getForm();
+            ->add('orderDate', DateType::class)
+            ->getForm();
         $formfind->handleRequest($request);
         if($formfind->isSubmitted())
         {
             $getUserId= $this->getDoctrine()->getRepository(Commande::class)
-                             ->findOneBy(array('orderDate'=> $commande->getOrderdate()));
+                ->findOneBy(array('orderDate'=> $commande->getOrderdate()));
             return $this->addFlash('success','Commande trouvée');
         }
         else
@@ -331,7 +332,7 @@ class AchatController extends Controller
 
         $user = $this->get('security.token_storage')->getToken()->getUser();
 
-       // $idOrder= $request->request->get('idOrder');
+        // $idOrder= $request->request->get('idOrder');
         $getCommande=$this->getDoctrine()->getRepository(Commande::class)->find($idOrder);
         $form = $this->createForm(ResetCommandeType::class, $getCommande);
         $form->handleRequest($request);
@@ -341,7 +342,7 @@ class AchatController extends Controller
             $em->persist($getCommande);
             $em->flush();
 
-             $this->addFlash('success','Commande annulée , veuillez consulter de nouveau votre liste de commandes ...');
+            $this->addFlash('success','Commande annulée , veuillez consulter de nouveau votre liste de commandes ...');
         }
 
 
@@ -384,8 +385,8 @@ class AchatController extends Controller
         foreach ($commandes as $commandes)
         {
             $realEntities[$commandes->getIdorder()]=[$commandes->getOrderdate(),
-                                                     $commandes->getOrderstate(),
-                                                    $commandes->getPaymentstate()];
+                $commandes->getOrderstate(),
+                $commandes->getPaymentstate()];
         }
 
         return $realEntities;

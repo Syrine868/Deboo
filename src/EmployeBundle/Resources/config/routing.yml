@@ -43,7 +43,12 @@ sendmail_page:
     path: /{idemp}/sendmail
     defaults: { _controller: EmployeBundle:Employe:sendMail}
 
-
+detailabsence:
+    path:     /detailab/{idemp}
+    defaults: { _controller: EmployeBundle:Employe:detail}
+employe_detailpage:
+    path:     /{id}/detail
+    defaults: { _controller: EmployeBundle:Employe:details }
 
 Event_Back:
     path:     /showBack
@@ -56,3 +61,11 @@ addEvent:
     path:     /add
     defaults: { _controller: EvenementBundle:Evenement:add }
 
+
+employe_export:
+    path:       /export
+    defaults: { _controller: EmployeBundle:Employe:Expo}
+
+employe_import:
+    path:       /import
+    defaults: { _controller: EmployeBundle:Employe:import}

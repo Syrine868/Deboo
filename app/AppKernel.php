@@ -34,6 +34,11 @@ class AppKernel extends Kernel
             new EmployeBundle\EmployeBundle(),
             new AncaRebeca\FullCalendarBundle\FullCalendarBundle(),
             //new Nomaya\SocialBundle\NomayaSocialBundle(),
+            new AffectationapiBundle\AffectationapiBundle(),
+            new Mgilet\NotificationBundle\MgiletNotificationBundle(),
+            new Liuggio\ExcelBundle\LiuggioExcelBundle(),
+
+
 
         ];
 

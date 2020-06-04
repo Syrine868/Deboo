@@ -21,7 +21,9 @@
 {% block content %}<center>
     <h1 style="color: #080808 ; font-family: bold ">Liste Des Employés</h1>
 
-   <a href="{{ path('employe_addpage') }}"><button type="submit" class="btn btn-primary btn-sm" style="margin-left: 1150px ; width: 100px; height: 40px" ><i class="fa fa-plus-circle"></i>  Ajouter</button></a>
+   <a href="{{ path('employe_addpage') }}"><button type="submit" class="btn btn-primary btn-sm"  ><i class="fa fa-plus-circle"></i>  Ajouter</button></a>
+    <a href="{{ path('employe_export') }}"><button type="submit" class="btn btn-primary btn-sm"  ><i class="fa fa-cloud-download"></i>  Export</button></a>
+    <a href="{{ path('employe_import') }}"><button type="submit" class="btn btn-primary btn-sm"  ><i class="fa fa-cloud-upload"></i>  Import</button></a>
 
     <br><br>
     <div class="content-panel">
@@ -49,18 +51,17 @@
 
                         <td>{{ emp.lastnameemp}}</td>
                         <td>{{ emp.firstnameemp }}</td>
-                        <td>{{ emp.age }}</td>
+                        <td>{{ emp.age }} Ans</td>
                         <td>{{ emp.phone }}</td>
-                        <td>{{ emp.salary }}</td>
+                        <td>{{ emp.salary }} DT</td>
                         <td>{{ emp.emailaddress }}</td>
                         <td>{{ emp.fonction }}</td>
                         <td scope="row">{{ emp.nbAbs }}</td>
                         <td class="gradeA">
 
-
                             <a href="{{ path('rating_new',{ 'idemp':emp.idemp }) }}"> <i class="fa fa-star-o"></i></a>
-
-
+                            <a href="{{ path('employe_detailpage', { 'id': emp.idemp }) }}"><i class="fa fa-plus"></i>  </a>
+                            <a href="{{ path('detailabsence', { 'idemp': emp.idemp }) }}"><i class="fa fa-list"></i>  </a>
                             <a href="{{ path('employe_updatepage',{ 'idemp': emp.idemp }) }}"><i class="fa fa-edit"></i> </a>
                             <a href="{{ path('employe_removepage',{ 'idemp': emp.idemp }) }}"><i class="fa fa-trash"></i> </a>
                             <a href="{{ path('sendmail_page', { 'idemp': emp.idemp }) }}"><i class="fa fa-mail-forward"></i>  </a>
