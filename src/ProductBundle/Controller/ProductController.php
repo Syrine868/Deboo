@@ -60,15 +60,15 @@ class  ProductController extends Controller
     {
         $em = $this->getDoctrine();
         $product=$em->getRepository(Product::class)->findAll();
-        /**
+       /* /**
          * @var $paginator \Knp\Component\Pager\Paginator
-         */
+
         $paginator =$this->get('knp_paginator');
         $listproduct = $paginator->paginate(
             $product,
             $request->query->getInt('page',1),
             $request->query->getInt('limit',3)
-        );
+        );*/
         /*$data= array();
         $stat=['category','product'];
         $nb=0;
@@ -147,7 +147,7 @@ class  ProductController extends Controller
 
         $em1=$this->getDoctrine()->getRepository(Product::class)->findAll();*/
 
-        return $this->render('@Product/Product/showproduct.html.twig', array('product'=>$listproduct));
+        return $this->render('@Product/Product/showproduct.html.twig', array('product'=>$product));
     }
     public function frontshowproductAction(Request $request)
     {

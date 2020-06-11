@@ -23,10 +23,11 @@ class Claim
 
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-
+     * @var \User
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User" )
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id", referencedColumnName="id")
+     * })
      */
     private $id;
 
@@ -117,19 +118,26 @@ class Claim
     }
 
     /**
-     * @return int
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     *
      */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
-     * @param int $id
+     * @param \User $id
      */
     public function setId($id)
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return \User
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
 

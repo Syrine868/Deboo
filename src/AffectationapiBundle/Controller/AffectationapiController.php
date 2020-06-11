@@ -81,7 +81,7 @@ class AffectationapiController extends Controller
     }
 
     public function questionsAction(){
-        // $list_faqs =$this->getDoctrine()->getRepository(Reponse::class)->findAll();
+        $list_faqs =$this->getDoctrine()->getRepository(Reponse::class)->findAll();
         $entitymanager = $this->getDoctrine()->getManager();
         $events = $entitymanager->getRepository(Reponse::class)->findLogBy();
         $serializer = new Serializer([new ObjectNormalizer()]);
@@ -103,6 +103,7 @@ class AffectationapiController extends Controller
     public function newAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+
         $user = new User();
         $user->setUsername($request->get('username'));
         $user->setEmail($request->get('email'));
@@ -145,15 +146,17 @@ class AffectationapiController extends Controller
         $formatted = $serializer->normalize($claims);
         return new JsonResponse($formatted);
     }
-    public function newClaimAction(Request $request)
+    public function newClaimAction(Request $request,$id)
     {
         $em = $this->getDoctrine()->getManager();
 
         $claims = new Claim();
+        $em = $this->getDoctrine()->getManager();
+        $user =$em->getRepository(User::class)->find($id);
         $claims->setMessage($request->get('message'));
         $claims->setStatus('Pending');
         $claims->setAnswer('Wait please');
-        $claims->setId($request->get('id'));
+        $claims->setId($user);
         $em->persist($claims);
         $em->flush();
         $serializer = new Serializer([new ObjectNormalizer()]);
@@ -172,9 +175,6 @@ class AffectationapiController extends Controller
     public function newAbsenceAction(Request $request)
     {
         $entitymanager = $this->getDoctrine()->getManager();
-        //$cat = new  Category();
-        //int $idcat;
-        //$idcat->setIdCategory($cat);
         try {
             $date = new \DateTime($request->get('date'));
             $idemp = $request->get('idemp');
